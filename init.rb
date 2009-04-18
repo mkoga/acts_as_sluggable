@@ -1,1 +1,1 @@
-ActiveRecord::Base.send(:include, ActsAsSlug)
+ActiveRecord::Base.send(:include, ActsAsSluggable)
