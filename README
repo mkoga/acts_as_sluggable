@@ -30,9 +30,9 @@ Example
 
   class Post < ActiveRecord::Base
     
-    acts_as_slug :title
-    acts_as_slug :title, :to_param => false # defaults to true, self.to_param returns slug
-    acts_as_slug :source => :first_name, :slug => :uri # set custom db fields
+    acts_as_sluggable :title
+    acts_as_sluggable :title, :to_param => false # defaults to true, self.to_param returns slug
+    acts_as_sluggable :source => :first_name, :slug => :uri # set custom db fields
 
   end
 

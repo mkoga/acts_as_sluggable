@@ -1,4 +1,4 @@
-module ActsAsSlug
+module ActsAsSluggable
 
   def self.included(base)
     base.extend(ActMethods)
@@ -6,7 +6,7 @@ module ActsAsSlug
 
   module ActMethods
     
-    def acts_as_slug(column, opts = {})
+    def acts_as_sluggable(column, opts = {})
       class_inheritable_accessor :slug_options
       self.slug_options = opts
       self.slug_options[:source] ||= column.to_sym || :name
