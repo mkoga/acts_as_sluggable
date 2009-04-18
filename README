@@ -5,35 +5,36 @@ Creates a sluggable version of a database field.
 
 Installation
 =======
-script/plugin install git://github.com/mkoga/acts_as_sluggable.git
+
+  script/plugin install git://github.com/mkoga/acts_as_sluggable.git
 
 Example
 =======
 
-class CreatePosts < ActiveRecord::Migration
-  def self.up
-    create_table :posts do |t|
-      t.string :title
-      t.string :slug
+  class CreatePosts < ActiveRecord::Migration
+    def self.up
+      create_table :posts do |t|
+        t.string :title
+        t.string :slug
 
-      t.timestamps
+        t.timestamps
+      end
+
+      add_index :posts, :slug
     end
 
-    add_index :posts, :slug
+    def self.down
+      drop_table :posts
+    end
   end
 
-  def self.down
-    drop_table :posts
+  class Post < ActiveRecord::Base
+    
+    acts_as_slug :title
+    acts_as_slug :title, :to_param => false # defaults to true, self.to_param returns slug
+    acts_as_slug :source => :first_name, :slug => :uri # set custom db fields
+
   end
-end
-
-class Post < ActiveRecord::Base
-  
-  acts_as_slug :title
-  acts_as_slug :title, :to_param => false # defaults to true, self.to_param returns slug
-  acts_as_slug :source => :first_name, :slug => :uri # set custom db fields
-
-end
 
 
 Copyright (c) 2009 Micah Koga, released under the MIT license
